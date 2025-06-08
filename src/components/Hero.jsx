@@ -1,50 +1,34 @@
-
 import { Button } from "@/components/ui/button";
 
 const Hero = () => {
   return (
-    <section className="bg-gradient-to-r from-purple-600 via-purple-500 to-blue-600 text-white py-16">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          <div className="space-y-6">
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-              Premium Hotel
-              <br />
-              <span className="text-purple-200">Cleaning Supplies</span>
-            </h1>
-            <p className="text-xl text-purple-100 max-w-lg">
-              Professional-grade cleaning products designed specifically for hotels, 
-              resorts, and hospitality businesses. Quality you can trust.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-white text-purple-600 hover:bg-purple-50 px-8 py-3 text-lg font-semibold">
-                SHOP NOW
-              </Button>
-            </div>
+    <section className="w-full h-screen bg-black text-white relative">
+      {/* Carousel Section */}
+      <div className="w-full h-full flex overflow-hidden relative">
+        {/* Carousel Images */}
+        <div className="grid grid-cols-3 w-full h-full">
+          <img src="public/lovable-uploads/30315751-a916-433d-857a-e5d75106d2cd.png" alt="Player 1" className="object-cover w-full h-full" />
+          <img src="public/lovable-uploads/ba988972-5746-4196-ac76-150124d63bd0.png" alt="Player 2" className="object-cover w-full h-full" />
+          <img src="public/lovable-uploads/c331aa5e-a4f7-49ee-a87f-2579961e6679.png" alt="Player 4" className="object-cover w-full h-full" />
+        </div>
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/50 flex justify-center items-center">
+          <div className="text-center">
+            <Button
+              size="lg"
+              className="bg-transparent text-white px-10 py-4 text-l font-bold  hover:outline hover:outline-2 hover:outline-purple-500 transition-all duration-200 border p-7"
+            >
+              SHOP NOW
+            </Button>
           </div>
-          
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-4">
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
-                <div className="text-3xl font-bold">500+</div>
-                <div className="text-purple-200">Hotels Served</div>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
-                <div className="text-3xl font-bold">24/7</div>
-                <div className="text-purple-200">Support</div>
-              </div>
-            </div>
-            <div className="space-y-4 mt-8">
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
-                <div className="text-3xl font-bold">99%</div>
-                <div className="text-purple-200">Satisfaction</div>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
-                <div className="text-3xl font-bold">48h</div>
-                <div className="text-purple-200">Fast Delivery</div>
-              </div>
-            </div>
-          </div>
+        </div>
+
+        {/* Carousel Indicators (Static design for now) */}
+        <div className="absolute bottom-4 w-full flex justify-center gap-2">
+          <div className="w-3 h-3 bg-white rounded-full"></div>
+          <div className="w-3 h-3 bg-white/50 rounded-full"></div>
+          <div className="w-3 h-3 bg-white/50 rounded-full"></div>
         </div>
       </div>
     </section>
