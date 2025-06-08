@@ -20,9 +20,6 @@ const Hero = () => {
               <Button size="lg" className="bg-white text-purple-600 hover:bg-purple-50 px-8 py-3 text-lg font-semibold">
                 SHOP NOW
               </Button>
-              <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-purple-600 px-8 py-3 text-lg">
-                View Catalog
-              </Button>
             </div>
           </div>
           
