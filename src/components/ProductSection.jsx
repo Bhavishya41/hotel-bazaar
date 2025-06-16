@@ -68,7 +68,7 @@ const ProductSection = () => {
 
         {/* Load More */}
         <div className="text-center">
-          <Button size="lg" className="px-8">
+          <Button onClick={() => window.location.href = "/catalog"} size="lg" className="px-8">
             Load More Products
           </Button>
         </div>

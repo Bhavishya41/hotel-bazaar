@@ -36,23 +36,24 @@ const Hero = () => {
         <div className="absolute inset-0 bg-black/50 flex justify-center items-center">
           <div className="text-center">
             <Button
-  size="lg"
-  className="
-  focus:outline-none focus:ring-0
+              onClick={() => window.location.href = "/catalog"}
+              size="lg"
+              className="
+              focus:outline-none focus:ring-0
 
-    bg-white/4 text-white 
-    px-10 py-6 text-lg font-bold 
-    border-2 border-white/30
-    hover:border-white/40 
-    hover:shadow-[0_0_15px_5px_rgba(0,0,0,0.45)]
-    hover:bg-white/4
-    hover:scale-105
-    transition-all duration-300
-    rounded-md
-  "
->
-  SHOP NOW
-</Button>
+                bg-white/4 text-white 
+                px-10 py-6 text-lg font-bold 
+                border-2 border-white/30
+                hover:border-white/40 
+                hover:shadow-[0_0_15px_5px_rgba(0,0,0,0.45)]
+                hover:bg-white/4
+                hover:scale-105
+                transition-all duration-300
+                rounded-md
+              "
+            >
+              SHOP NOW
+            </Button>
 
           </div>
         </div>
