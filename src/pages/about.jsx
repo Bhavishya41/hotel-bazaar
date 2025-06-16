@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const cart = () => {
+const about = () => {
     return (
         <div>
             <Header/>
@@ -10,4 +10,5 @@ const cart = () => {
     )
 }
 
-export default cart;
+export default about;
+
