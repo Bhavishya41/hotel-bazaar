@@ -48,7 +48,7 @@ const Header = () => {
 							<Search className="h-5 w-5 md:hidden" />
 							<User className="h-5 w-5 hidden md:block" />
 						</Button>
-						<Button variant="ghost" size="sm" className="relative">
+						<Button onClick={() => window.location.href = "/cart"}variant="ghost" size="sm" className="relative">
 							<ShoppingCart className="h-5 w-5" />
 							<span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
 								0
