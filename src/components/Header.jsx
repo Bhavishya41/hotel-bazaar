@@ -21,7 +21,7 @@ const Header = () => {
 
 					{/* Logo */}
 					<div className="flex items-center space-x-2">
-						<div className="w-20 h-20 bg-primary rounded-lg flex items-center justify-center overflow-hidden">
+						<div onClick={() => window.location.href = "/"} className="w-20 h-20 bg-primary rounded-lg flex items-center justify-center overflow-hidden">
 							<img
 								src="\lovable-uploads\IMG-20250607-WA0001.jpg"
 								className="object-contain h-full w-full"
