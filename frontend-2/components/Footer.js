@@ -65,22 +65,25 @@ export default function Footer() {
             <ul className="space-y-3 text-gray-300 text-sm">
               <li className="flex items-center">
                 <Phone className="w-4 h-4 mr-2" />
-                <span>+1 (555) 123-4567</span>
+                <span>+91 9227008742, +91 9227448742</span>
               </li>
               <li className="flex items-center">
                 <Mail className="w-4 h-4 mr-2" />
-                <span>info@hotelbazaar.com</span>
+                <span>hotelbazar2025@gmail.com</span>
               </li>
               <li className="flex items-start">
-                <MapPin className="w-4 h-4 mr-2 mt-0.5" />
-                <span>123 Business District, City, State 12345</span>
+                <MapPin className="w-4 h-4 mr-2 mt-1 flex-shrink-0" />
+                <span className="text-sm leading-relaxed">
+                  Simfnity Enterprises, 104 Sunrise Apartment, Near Wikalp Hospital, Chhani Road.
+                  Vadodara, Gujarat India 390024
+                </span>
               </li>
             </ul>
           </div>
         </div>
         
         <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 text-sm">
-          <p>&copy; 2024 Hotel Bazaar. All rights reserved.</p>
+          <p>&copy; 2025 Hotel Bazaar. All rights reserved.</p>
         </div>
       </div>
     </footer>

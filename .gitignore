@@ -1,3 +1,5 @@
 backend-2/node_modules/bcrypt/prebuilds/win32-x64/bcrypt.node
 backend-2/.env
 frontend-2/.env.example
+*.ts
+/backend-2/node_modules
