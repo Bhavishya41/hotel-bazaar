@@ -64,3 +64,60 @@ export const loginAdmin = async (credentials) => {
   if (!response.ok) throw new Error('Login failed');
   return response.json();
 };
+
+// User Profile API
+export const getUserProfile = async () => {
+  const response = await fetch(`${API_BASE_URL}/user/profile`, {
+    headers: getAuthHeaders(),
+  });
+  if (!response.ok) throw new Error('Failed to fetch profile');
+  return response.json();
+};
+
+export const updateUserProfile = async (profileData) => {
+  const response = await fetch(`${API_BASE_URL}/user/profile`, {
+    method: 'PUT',
+    headers: getAuthHeaders(),
+    body: JSON.stringify(profileData),
+  });
+  if (!response.ok) throw new Error('Failed to update profile');
+  return response.json();
+};
+
+export const updateUserPassword = async (passwordData) => {
+  const response = await fetch(`${API_BASE_URL}/user/profile/password`, {
+    method: 'PUT',
+    headers: getAuthHeaders(),
+    body: JSON.stringify(passwordData),
+  });
+  if (!response.ok) throw new Error('Failed to update password');
+  return response.json();
+};
+
+// Orders API
+export const getUserOrders = async () => {
+  const response = await fetch(`${API_BASE_URL}/order`, {
+    headers: getAuthHeaders(),
+  });
+  if (!response.ok) throw new Error('Failed to fetch orders');
+  return response.json();
+};
+
+export const placeOrder = async (orderData) => {
+  const response = await fetch(`${API_BASE_URL}/order`, {
+    method: 'POST',
+    headers: getAuthHeaders(),
+    body: JSON.stringify(orderData),
+  });
+  if (!response.ok) throw new Error('Failed to place order');
+  return response.json();
+};
+
+export const requestOrderOTP = async () => {
+  const response = await fetch(`${API_BASE_URL}/order/request-otp`, {
+    method: 'POST',
+    headers: getAuthHeaders(),
+  });
+  if (!response.ok) throw new Error('Failed to request OTP');
+  return response.json();
+};

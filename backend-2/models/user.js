@@ -16,6 +16,10 @@ const userSchema = new mongo.Schema(
             unique: true,
             sparse: true
         },
+        address: {
+            type: String,
+            required: false
+        },
         password: String,
         googleId: String, 
         role: { 

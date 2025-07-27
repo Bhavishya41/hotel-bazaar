@@ -24,6 +24,19 @@ export default function Navbar() {
     return null;
   }
 
+  // Handle token from URL after Google OAuth redirect
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tokenFromUrl = urlParams.get('token');
+
+    if (tokenFromUrl) {
+      localStorage.setItem('token', tokenFromUrl);
+      // Clean the URL by removing the token, then dispatch authchange
+      router.replace(window.location.pathname);
+      window.dispatchEvent(new Event("authchange"));
+    }
+  }, [router]);
+
   useEffect(() => {
     const checkAuth = async () => {
       const token = localStorage.getItem('token');
@@ -53,6 +66,7 @@ export default function Navbar() {
       method: 'POST',
       credentials: 'include',
     });
+    localStorage.removeItem('token');
     setUser(null);
     router.push('/');
   };
@@ -88,9 +102,9 @@ export default function Navbar() {
                   Admin
                 </Link>
               )}
-              <button className="text-gray-600 hover:text-lavender transition-colors" title="Profile">
+              <Link href="/profile" className="text-gray-600 hover:text-lavender transition-colors" title="Profile">
                 <User className="w-5 h-5" />
-              </button>
+              </Link>
               <Link href="/cart" className="relative">
                 <ShoppingCart className="w-5 h-5 text-gray-600 hover:text-lavender transition-colors" />
                 {getItemCount() > 0 && (

@@ -22,7 +22,7 @@ const sendOrderOTP = async (email, otp) => {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: email,
-      subject: 'Order Verification OTP',
+      subject: 'Password Reset OTP',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #ff6b35;">Order Verification OTP</h2>
