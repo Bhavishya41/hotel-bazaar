@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
@@ -9,6 +10,21 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  useEffect(() => {
+    // Check for error messages from URL params
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('error') === 'account_exists') {
+      const email = params.get('email') || '';
+      setError(`An account with ${email} already exists. Please login with your password.`);
+      // Pre-fill the email field
+      setEmail(email);
+    } else if (params.get('error') === 'oauth_failed') {
+      setError("Google OAuth failed. Please try again.");
+    } else if (params.get('message') === 'verification_sent') {
+      setSuccess("Account created successfully! Please check your email to verify your account.");
+    }
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { createContext, useContext, useState, useEffect } from 'react';
 
@@ -14,15 +14,21 @@ export const useCart = () => {
 
 export const CartProvider = ({ children }) => {
   const [items, setItems] = useState(() => {
-    const savedCart = localStorage.getItem('cart');
-    return savedCart ? JSON.parse(savedCart) : [];
+    // Check if localStorage is available (client-side)
+    if (typeof window !== 'undefined') {
+      const savedCart = localStorage.getItem('cart');
+      return savedCart ? JSON.parse(savedCart) : [];
+    }
+    return [];
   });
 
   useEffect(() => {
-    console.log('[CartProvider] Saving cart to localStorage:', items);
-    localStorage.setItem('cart', JSON.stringify(items));
+    if (typeof window !== 'undefined') {
+      console.log('[CartProvider] Saving cart to localStorage:', items);
+      localStorage.setItem('cart', JSON.stringify(items));
+    }
   }, [items]);
-
+  
   const addToCart = (product, quantity = 1) => {
     setItems(prev => {
       const existingItem = prev.find(item => item.product._id === product._id);

@@ -67,7 +67,7 @@ router.get("/api/auth/google/callback",
             } else {
                 if (isFromSignup) {
                     // User tried to sign up but already has account, redirect to login with message
-                    res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:3000'}/auth/login?error=account_exists&email=` + encodeURIComponent(user.email));
+                    res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:3000'}/login?error=account_exists&email=` + encodeURIComponent(user.email));
                 } else {
                     // Normal login flow
                     let payload = { id: req.user.id };
