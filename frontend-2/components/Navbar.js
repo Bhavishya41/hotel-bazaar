@@ -62,7 +62,7 @@ export default function Navbar() {
   }, []);
 
   const handleLogout = async () => {
-    await fetch('http://localhost:8000/user/logout', {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/user/logout`, {
       method: 'POST',
       credentials: 'include',
     });
