@@ -33,7 +33,10 @@ export default function Footer() {
               <li><a href="#" className="hover:text-white transition-colors">About Us</a></li><br></br>
               <Link href="/products" ><li className="hover:text-white transition-colors">Products</li></Link> <br></br>
               {/* <li><a href="#" className="hover:text-white transition-colors">Categories</a></li> */}
-              <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li><br></br>
+              <li><Link href="#" className="hover:text-white transition-colors">Terms & Condition</Link></li><br></br>
+              <li><Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link></li><br></br>
+              <li><Link href="#" className="hover:text-white transition-colors">Shipping & Return</Link></li>
             </ul>
           </div>
           
@@ -45,12 +48,12 @@ export default function Footer() {
                 <Link href="/products?category=Bathroom%20Cleaners" className="hover:text-white transition-colors">
                   Bathroom Cleaners
                 </Link>
-              </li>
+              </li><br></br>
               <li>
                 <Link href="/products?category=Glass%20%26%20Surface" className="hover:text-white transition-colors">
                   Glass & Surface
                 </Link>
-              </li>
+              </li><br></br>
               <li>
                 <Link href="/products?category=Personal%20Care" className="hover:text-white transition-colors">
                   Personal Care
@@ -66,11 +69,11 @@ export default function Footer() {
               <li className="flex items-center">
                 <Phone className="w-4 h-4 mr-2" />
                 <span>+91 9227008742, +91 9227448742</span>
-              </li>
+              </li><br></br>
               <li className="flex items-center">
                 <Mail className="w-4 h-4 mr-2" />
                 <span>hotelbazar2025@gmail.com</span>
-              </li>
+              </li><br></br>
               <li className="flex items-start">
                 <MapPin className="w-4 h-4 mr-2 mt-1 flex-shrink-0" />
                 <span className="text-sm leading-relaxed">

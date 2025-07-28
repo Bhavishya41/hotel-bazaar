@@ -14,11 +14,11 @@ export default function ContactPage() {
   });
   const [status, setStatus] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const accessKey = '2c6761e1-ab1c-4e0a-8a9b-e0f451e4834f';
+  const accessKey = 'b7daefe7-5123-4acd-86ce-3ccca501b2a7';
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value })); 
   };
 
   const validate = () => {
