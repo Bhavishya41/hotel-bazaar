@@ -30,13 +30,14 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4 text-white">Quick Links</h4>
             <ul className=" text-gray-300 text-sm">
-              <li><a href="#" className="hover:text-white transition-colors">About Us</a></li><br></br>
+              <li><a href="/about" className="hover:text-white transition-colors">About Us</a></li><br></br>
               <Link href="/products" ><li className="hover:text-white transition-colors">Products</li></Link> <br></br>
               {/* <li><a href="#" className="hover:text-white transition-colors">Categories</a></li> */}
               <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li><br></br>
-              <li><Link href="#" className="hover:text-white transition-colors">Terms & Condition</Link></li><br></br>
-              <li><Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link></li><br></br>
-              <li><Link href="#" className="hover:text-white transition-colors">Shipping & Return</Link></li>
+              <li><Link href="/support" className="hover:text-white transition-colors">Support Page</Link></li><br></br>
+              <li><Link href="/shipping-returns" className="hover:text-white transition-colors">Shipping & Returns</Link></li><br></br>
+              <li><Link href="/policy" className="hover:text-white transition-colors">Privacy Policy</Link></li><br></br>
+              <li><Link href="/terms-conditions" className="hover:text-white transition-colors">Terms & Condition</Link></li><br></br>
             </ul>
           </div>
           
