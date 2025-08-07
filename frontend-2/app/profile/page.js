@@ -12,8 +12,6 @@ export default function ProfilePage() {
   const [ordersLoading, setOrdersLoading] = useState(true);
   const [editing, setEditing] = useState(false);
   const [showPasswordReset, setShowPasswordReset] = useState(false);
-  const [showSecurityChecks, setShowSecurityChecks] = useState(false);
-  const [securityStep, setSecurityStep] = useState(0);
   const [formData, setFormData] = useState({});
   const [passwordData, setPasswordData] = useState({
     currentPassword: '',
@@ -25,22 +23,8 @@ export default function ProfilePage() {
     new: false,
     confirm: false
   });
-  const [securityAnswers, setSecurityAnswers] = useState({
-    question1: '',
-    question2: '',
-    question3: ''
-  });
   const router = useRouter();
   const { showToast } = useToast();
-
-  // Security questions for password reset
-  const securityQuestions = [
-    "What was the name of your first pet?",
-    "In which city were you born?",
-    "What was your mother's maiden name?",
-    "What was the name of your first school?",
-    "What is your favorite color?"
-  ];
 
   useEffect(() => {
     fetchUserProfile();
@@ -185,19 +169,6 @@ export default function ProfilePage() {
     } catch (error) {
       console.error('Error updating password:', error);
       showToast('Error updating password', 'error');
-    }
-  };
-
-  const handleSecurityCheck = () => {
-    // Simulate security check - in real app, you'd verify against stored answers
-    const isCorrect = securityAnswers.question1 && securityAnswers.question2 && securityAnswers.question3;
-    
-    if (isCorrect) {
-      setSecurityStep(1);
-      setShowPasswordReset(true);
-      setShowSecurityChecks(false);
-    } else {
-      showToast('Please answer all security questions', 'error');
     }
   };
 
@@ -351,7 +322,7 @@ export default function ProfilePage() {
                 {/* Hidden Password Reset Button */}
                 <div className="relative group">
                   <button
-                    onClick={() => setShowSecurityChecks(true)}
+                    onClick={() => setShowPasswordReset(true)}
                     className="w-full flex items-center justify-center space-x-2 bg-gray-100 text-gray-600 px-4 py-3 rounded-lg hover:bg-gray-200 transition-colors opacity-50 hover:opacity-100"
                   >
                     <Lock className="w-4 h-4" />
@@ -378,13 +349,7 @@ export default function ProfilePage() {
                     }`}>
                       {user?.emailVerified ? 'Verified' : 'Not Verified'}
                     </span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Account Type</span>
-                    <span className="px-2 py-1 rounded-full text-xs bg-lavender bg-opacity-20 text-lavender">
-                      {user?.role === 'admin' ? 'Admin' : 'User'}
-                    </span>
-                  </div>
+                  </div> 
                 </div>
               </div>
             </div>
@@ -435,62 +400,6 @@ export default function ProfilePage() {
           </div>
         </div>
       </div>
-
-      {/* Security Checks Modal */}
-      {showSecurityChecks && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-darkblue">Security Verification</h3>
-              <button
-                onClick={() => setShowSecurityChecks(false)}
-                className="text-gray-400 hover:text-gray-600"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-            
-            <div className="space-y-4">
-              <p className="text-sm text-gray-600 mb-4">
-                Please answer security questions to reset your password:
-              </p>
-              
-              {[0, 1, 2].map((index) => (
-                <div key={index}>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    {securityQuestions[index]}
-                  </label>
-                  <input
-                    type="text"
-                    value={securityAnswers[`question${index + 1}`]}
-                    onChange={(e) => setSecurityAnswers({
-                      ...securityAnswers,
-                      [`question${index + 1}`]: e.target.value
-                    })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lavender"
-                    placeholder="Enter your answer"
-                  />
-                </div>
-              ))}
-              
-              <div className="flex space-x-3 pt-4">
-                <button
-                  onClick={handleSecurityCheck}
-                  className="flex-1 bg-lavender text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors"
-                >
-                  Verify
-                </button>
-                <button
-                  onClick={() => setShowSecurityChecks(false)}
-                  className="flex-1 bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400 transition-colors"
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Password Reset Modal */}
       {showPasswordReset && (

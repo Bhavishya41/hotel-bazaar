@@ -263,6 +263,30 @@ router.post("/login", async(req, res) => {
     }
 });
 
+router.put("/profile", jwtAuthMiddleware, async(req,res)=>{
+    let userId = req.user.id;
+    let { name, email, phone, address } = req.body;
+    try{
+        let user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Update user fields
+        user.name = name || user.name;
+        user.email = email || user.email; // Consider if email should be updatable without re-verification
+        user.phone = phone || user.phone;
+        user.address = address || user.address;
+
+        await user.save();
+        res.status(200).json(user);
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({message:"internal server error"});
+    }
+})
+
 router.put("/profile/password", jwtAuthMiddleware, async (req,res) => {
     let userId = req.user.id;
     let { currPassword, newPassword } = req.body;
