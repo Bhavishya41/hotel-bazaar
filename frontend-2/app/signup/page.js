@@ -55,7 +55,7 @@ export default function SignupPage() {
     setError("");
     setSuccess("");
     try {
-      const res = await fetch(`${NEXT_PUBLIC_API_URL}/user/signup`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
