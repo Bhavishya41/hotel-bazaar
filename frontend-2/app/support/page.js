@@ -12,7 +12,7 @@ export default function SupportPage() {
           <h2 className="text-3xl font-semibold text-center text-[#4A2B7F] mb-6 relative after:absolute after:content-[''] after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:w-16 after:h-1 after:bg-[#D3A7FF] after:rounded"></h2>
           
           <p className="text-gray-700 mb-6 text-base space-y-6">
-            We're dedicated to providing the best support for your hospitality needs of
+            We&apos;re dedicated to providing the best support for your hospitality needs of
             chemical and housekeeping needs. Please find answers to common questions
             below or contact us directly.
           </p>
