@@ -14,7 +14,7 @@ export default function TermsAndConditions() {
           <section>
             <h3 className="text-xl font-semibold text-purple-700 mb-2">1. Introduction</h3>
             <p>
-              Welcome to Hotel Bazar. These Terms & Conditions ("Terms") govern your use of our website and services. By accessing or using our website, you agree to be bound by these Terms.
+              Welcome to Hotel Bazar. These Terms & Conditions (&quot;Terms&quot;) govern your use of our website and services. By accessing or using our website, you agree to be bound by these Terms.
             </p>
           </section>
 
@@ -69,7 +69,7 @@ export default function TermsAndConditions() {
             <p>By purchasing chemicals and cleaning products from Hotel Bazar, you acknowledge and agree to the following:</p>
             <ul className="list-disc pl-5 mt-2 space-y-2">
               <li>You are a commercial entity (e.g., hotel, resort) or authorized buyer who understands the industrial nature of these products.</li>
-              <li>You will read and strictly adhere to all <em>Manufacturer's Instructions, Safety Data Sheets (SDS)</em>, and product labels provided with each chemical.</li>
+              <li>You will read and strictly adhere to all <em>Manufacturer&apos;s Instructions, Safety Data Sheets (SDS)</em>, and product labels provided with each chemical.</li>
               <li>You will ensure proper <em>Personal Protective Equipment (PPE)</em> is used by personnel handling the products.</li>
               <li>You are responsible for the safe storage, handling, and disposal of all products as per local and national regulations.</li>
               <li>Hotel Bazar is not liable for any damages, injuries, or losses resulting from the improper use, storage, or handling of products purchased from our website.</li>
@@ -86,7 +86,7 @@ export default function TermsAndConditions() {
           <section>
             <h3 className="text-xl font-semibold text-purple-700 mb-2">8. Disclaimer of Warranties; Limitation of Liability</h3>
             <p>
-              Hotel Bazar provides its website and services on an "as is" and "as available" basis. We do not guarantee that the website will be uninterrupted, error-free, or secure. To the fullest extent permitted by law, Hotel Bazar shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of your use of, or inability to use, our services or products.
+              Hotel Bazar provides its website and services on an &quot;as is&quot; and &quot;as available&quot; basis. We do not guarantee that the website will be uninterrupted, error-free, or secure. To the fullest extent permitted by law, Hotel Bazar shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of your use of, or inability to use, our services or products.
             </p>
           </section>
 
