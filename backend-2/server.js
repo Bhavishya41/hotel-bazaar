@@ -33,7 +33,7 @@ app.use(passport.session());
 require('./middlewares/googleOAuth');
 
 app.use(cors({
-  origin: 'https://www.hotelbazar.org/',
+  origin: 'https://www.hotelbazar.org',
   credentials: true
 }));
 
