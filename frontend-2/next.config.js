@@ -1,16 +1,22 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async rewrites() {
+    // Use NEXT_PUBLIC_BACKEND_URL in production (e.g., https://api.hotelbazar.org)
+    // and fall back to localhost for local development.
+    const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
     return [
       {
         source: '/user/:path*',
-        destination: 'http://localhost:8000/user/:path*', // Proxy to backend
+        destination: `${backendBase}/user/:path*`,
       },
       {
         source: '/product/:path*',
-        destination: 'http://localhost:8000/product/:path*',
+        destination: `${backendBase}/product/:path*`,
       },
-      // Add more rewrites if you have other backend routes
+      {
+        source: '/order/:path*',
+        destination: `${backendBase}/order/:path*`,
+      },
     ];
   },
 };
