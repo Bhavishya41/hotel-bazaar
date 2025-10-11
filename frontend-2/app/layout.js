@@ -12,6 +12,11 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata = {
   title: 'Hotel Bazaar',
   description: 'Your destination for premium hotel products',
+  icons: {
+    icon: '/logo.ico',
+    shortcut: '/logo.ico',
+    apple: '/logo.png',
+  },
 };
 
 export default function RootLayout({ children }) {

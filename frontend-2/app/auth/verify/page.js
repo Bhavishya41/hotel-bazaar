@@ -17,9 +17,18 @@ export default function VerifyEmailPage() {
     }
     const verify = async () => {
       try {
-        const res = await fetch(`${NEXT_PUBLIC_API_URL}/user/verify-email?token=${token}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/user/verify-email?token=${token}`);
         const data = await res.json();  
-        if (res.ok) {
+        if (res.status === 400 && data.message && (
+          data.message.includes("already verified") || data.message.includes("Invalid verification token"))
+        ) {
+          setStatus("info");
+          setMessage(
+            data.message.includes("already verified")
+              ? "Your email is already verified. You can now log in."
+              : "This verification link is invalid or has already been used. If you have already verified your email, you can log in."
+          );
+        } else if (res.ok) {
           setStatus("success");
           setMessage(data.message || "Email verified successfully!");
           setTimeout(() => router.push("/login"), 2500);
@@ -49,7 +58,10 @@ export default function VerifyEmailPage() {
         {status === "error" && (
           <div className="text-red-500 text-center mt-4">{message}</div>
         )}
+        {status === "info" && (
+          <div className="text-blue-500 text-center mt-4">{message}</div>
+        )}
       </div>
     </div>
   );
-} 
+}
