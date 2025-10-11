@@ -6,23 +6,15 @@ const generateOTP = () => {
   return crypto.randomInt(100000, 999999).toString();
 };
 
-// Send OTP email
+// Send OTP email using SendGrid
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 const sendOrderOTP = async (email, otp) => {
   try {
-    const transporter = require('nodemailer').createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-      }
-    });
-    
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
+    const msg = {
       to: email,
-      subject: 'Password Reset OTP',
+      from: process.env.EMAIL, // Must be a verified sender in SendGrid
+      subject: 'Verify your order',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #ff6b35;">Order Verification OTP</h2>
@@ -38,12 +30,10 @@ const sendOrderOTP = async (email, otp) => {
         </div>
       `
     };
-    
-    const result = await transporter.sendMail(mailOptions);
-    return { success: true, messageId: result.messageId };
-    
+    await sgMail.send(msg);
+    return { success: true };
   } catch (error) {
-    console.error('OTP email sending error:', error);
+    console.error('SendGrid OTP email error:', error);
     return { success: false, error: error.message };
   }
 };

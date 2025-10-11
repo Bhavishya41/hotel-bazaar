@@ -5,6 +5,7 @@ const Order = require("./../models/orders");
 const User = require("./../models/user");
 const Product = require("./../models/products"); // Added Product model import
 const { generateOTP, sendOrderOTP, verifyOTP } = require("../utils/otpUtils");
+const { sendOrderNotification } = require("../utils/emailValidator");
 
 // Request OTP for order placement
 router.post("/request-otp", jwtAuthMiddleware, async (req, res) => {
@@ -50,8 +51,8 @@ router.post("/request-otp", jwtAuthMiddleware, async (req, res) => {
 // Place order with OTP verification
 router.post("/", jwtAuthMiddleware, async (req, res) => {
     try {
-        const userId = req.user.id;
-        const { products, otp } = req.body; 
+    const userId = req.user.id;
+    const { products, otp, total, customer } = req.body;
         
         const user = await User.findById(userId);
         if (!user){
@@ -90,6 +91,12 @@ router.post("/", jwtAuthMiddleware, async (req, res) => {
 
         user.orders.push(order._id);
         await user.save();
+
+        // Send admin notification email
+        const emailResult = await sendOrderNotification({ products, total, orderDate: order.orderDate }, { name: user.name, email: user.email, phone: user.phone });
+        if (!emailResult.success) {
+            console.log("Failed to send admin notification:", emailResult.error);
+        }
 
         res.status(201).json({ message: "Order placed successfully", order, updatedProducts });
     } catch (err) {

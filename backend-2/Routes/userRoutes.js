@@ -40,7 +40,7 @@ router.get("/api/auth/google/callback",
                     const stateData = JSON.parse(Buffer.from(req.query.state, 'base64').toString());
                     isFromSignup = stateData.from === 'signup';
                 } catch (error) {
-                    console.log("OAuth Callback - Failed to parse state:", error);
+                    // removed debug log
                 }
             }
             
@@ -127,6 +127,7 @@ router.post("/signup", async(req, res) => {
         if (user.role !== "admin") {
             verificationToken = crypto.randomBytes(32).toString('hex');
             verificationExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+            // removed debug logs
         }
         
         // Create user with verification fields (admin users are pre-verified)
@@ -136,6 +137,7 @@ router.post("/signup", async(req, res) => {
         
         let newUser = await new User(user);
         let result = await newUser.save();
+        console.log("User saved with verification token:", result.verificationToken);
 
         // Send verification email (skip for admin users)
         let emailResult = { success: true };
@@ -154,7 +156,7 @@ router.post("/signup", async(req, res) => {
             emailSent: emailResult.success
         });
     } catch (err) {
-        console.error("Signup error:", err);
+    // removed debug log
         res.status(500).json({ message: "internal server error" });
     }
 });
@@ -164,8 +166,18 @@ router.get("/verify-email", async (req, res) => {
     try {
         const { token } = req.query;
         
+    // removed debug log
+        
         if (!token) {
             return res.status(400).json({ message: "Verification token is required." });
+        }
+        
+        // First, let's check if any user has this token (ignoring expiry for now)
+        const userWithToken = await User.findOne({ verificationToken: token });
+    // removed debug log
+        
+        if (userWithToken) {
+            // removed debug logs
         }
         
         const user = await User.findOne({ 
@@ -174,7 +186,12 @@ router.get("/verify-email", async (req, res) => {
         });
         
         if (!user) {
-            return res.status(400).json({ message: "Invalid or expired verification token." });
+            // Check if token exists but is expired
+            const expiredUser = await User.findOne({ verificationToken: token });
+            if (expiredUser) {
+                return res.status(400).json({ message: "Verification token has expired. Please request a new verification email." });
+            }
+            return res.status(400).json({ message: "Invalid verification token." });
         }
         
         // Mark email as verified
@@ -183,6 +200,7 @@ router.get("/verify-email", async (req, res) => {
         user.verificationExpires = undefined;
         await user.save();
         
+    // removed debug log
         res.status(200).json({ message: "Email verified successfully! You can now login." });
     } catch (error) {
         console.error("Email verification error:", error);
@@ -221,7 +239,7 @@ router.post("/resend-verification", async (req, res) => {
             res.status(500).json({ message: "Failed to send verification email." });
         }
     } catch (error) {
-        console.error("Resend verification error:", error);
+    // removed debug log
         res.status(500).json({ message: "Internal server error" });
     }
 });
@@ -258,7 +276,7 @@ router.post("/login", async(req, res) => {
         });
         res.status(200).json({ role: user.role, token });
     } catch (err) {
-        console.log(err);
+    // removed debug log
         res.status(500).json({ message: "internal server error" });
     }
 });
@@ -282,7 +300,7 @@ router.put("/profile", jwtAuthMiddleware, async(req,res)=>{
         res.status(200).json(user);
     }
     catch(err){
-        console.log(err);
+    // removed debug log
         res.status(500).json({message:"internal server error"});
     }
 })
@@ -304,20 +322,20 @@ router.put("/profile/password", jwtAuthMiddleware, async (req,res) => {
 
         res.status(200).json({message:"password updated successfully"});
     }catch(err){
-        console.log(err);
+        // removed debug log
         res.status(500).json({message:"internal server error"});
     }
 });
 
 router.get("/profile", jwtAuthMiddleware, async(req,res) => {
     let userId = req.user.id;
-    console.log("Profile request for user ID:", userId);
+    // removed debug log
     try{
         let user = await User.findById(userId);
-        console.log("Profile found for user:", user.email);
+        // removed debug log
         res.status(200).json(user);
     }catch(err){
-        console.log("Profile error:", err);
+        // removed debug log
         res.status(500).json({message:"internal server error"});
     }
 })
@@ -382,7 +400,7 @@ router.post("/setup-password", tempTokenAuthMiddleware, async (req, res) => {
 
         res.status(200).json({ message: "Profile completed successfully", token });
     } catch (error) {
-        console.error("Password setup error:", error);
+        // removed debug log
         res.status(500).json({ message: "Internal server error" });
     }
 });
