@@ -21,11 +21,21 @@ export default function CartPage() {
 
   if (items.length === 0) {
     return (
-      <div className="container py-12 text-center">
-        <h1 className="text-4xl font-bold mb-8">Your Cart</h1>
-        <p className="text-gray-600 mb-8">Your cart is empty</p>
-        <Button href="/products">Continue Shopping</Button>
-      </div>
+      <>
+        <div className="container py-12 text-center">
+          <h1 className="text-4xl font-bold mb-8">Your Cart</h1>
+          <p className="text-gray-600 mb-8">Your cart is empty</p>
+          <Button href="/products">Continue Shopping</Button>
+        </div>
+        <Modal isOpen={showModal} onClose={() => setShowModal(false)} title="Order Placed!">
+          <div className="text-center">
+            <div className="text-3xl mb-4">✅</div>
+            <div className="text-lg font-semibold mb-2">Your order has been placed!</div>
+            <div className="text-gray-600 mb-4">We will soon contact you regarding your order.</div>
+            <Button className="w-full" onClick={() => setShowModal(false)}>Close</Button>
+          </div>
+        </Modal>
+      </>
     );
   }
 
@@ -152,16 +162,6 @@ export default function CartPage() {
           {error && <div className="text-red-500 text-sm mt-2 text-center">{error}</div>}
         </div>
       </div>
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)} title="Order Placed!">
-        <div className="text-center">
-          <div className="text-3xl mb-4">🎉</div>
-          <div className="text-lg font-semibold mb-2">Your order has been placed!</div>
-          <div className="text-gray-600 mb-4">We will soon contact you regarding your order.</div>
-          <Button className="w-full" onClick={() => setShowModal(false)}>Close</Button>
-        </div>
-      </Modal>
-      {/* Debug info */}
-      {showModal && <div className="fixed top-4 right-4 bg-red-500 text-white p-2 z-[60]">Modal should be visible</div>}
     </div>
   );
 }
