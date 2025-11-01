@@ -155,15 +155,19 @@ export default function ProductForm({ product, onSave, onCancel }) {
         <label htmlFor="category" className="block text-sm font-medium mb-1">
           Category
         </label>
-        <input
-          type="text"
-          id="category"
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lavender"
-          required
-        />
+        <select
+  id="category"
+  name="category"
+  value={formData.category}
+  onChange={handleChange}
+  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-lavender"
+  required
+>
+  <option value="" disabled>Select a Category</option>
+  <option value="Bathroom Cleaners">Bathroom Cleaners</option>
+  <option value="Glass & Surface">Glass & Surface</option>
+  <option value="Personal Care">Personal Care</option>
+</select>
       </div>
 
       <div>

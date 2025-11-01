@@ -34,14 +34,22 @@ export const CartProvider = ({ children }) => {
       const existingItem = prev.find(item => item.product._id === product._id);
       
       if (existingItem) {
-        return prev.map(item =>
-          item.product._id === product._id
-            ? { ...item, quantity: item.quantity + quantity }
-            : item
-        );
+        return prev.map(item => {
+          if (item.product._id === product._id) {
+            const newQuantity = item.quantity + quantity;
+            const maxStock = product.stock || item.product.stock || 0;
+            // Enforce stock limit
+            const finalQuantity = Math.min(newQuantity, maxStock);
+            return { ...item, quantity: finalQuantity };
+          }
+          return item;
+        });
       }
       
-      return [...prev, { product, quantity }];
+      // For new items, respect stock limit
+      const maxStock = product.stock || 0;
+      const finalQuantity = Math.min(quantity, maxStock);
+      return [...prev, { product, quantity: finalQuantity }];
     });
   };
 
@@ -56,11 +64,15 @@ export const CartProvider = ({ children }) => {
     }
     
     setItems(prev =>
-      prev.map(item =>
-        item.product._id === productId
-          ? { ...item, quantity: newQuantity }
-          : item
-      )
+      prev.map(item => {
+        if (item.product._id === productId) {
+          const maxStock = item.product.stock || 0;
+          // Enforce stock limit
+          const finalQuantity = Math.min(newQuantity, maxStock);
+          return { ...item, quantity: finalQuantity };
+        }
+        return item;
+      })
     );
   };
 

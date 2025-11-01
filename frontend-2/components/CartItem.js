@@ -7,6 +7,8 @@ import { useCart } from '@/hooks/useCart';
 
 export default function CartItem({ item }) {
   const { updateQuantity, removeFromCart } = useCart();
+  const stock = item.product.stock || 0;
+  const isAtMaxStock = item.quantity >= stock;
 
   return (
     <div className="flex items-center space-x-4 bg-white p-4 rounded-lg border border-gray-200">
@@ -22,6 +24,9 @@ export default function CartItem({ item }) {
       <div className="flex-1 min-w-0">
         <h3 className="font-semibold text-lg truncate">{item.product.name}</h3>
         <p className="text-lavender font-bold">Rs. {item.product.price}</p>
+        {stock > 0 && (
+          <p className="text-xs text-gray-500">Stock: {stock}</p>
+        )}
       </div>
 
       <div className="flex items-center space-x-2">
@@ -38,6 +43,8 @@ export default function CartItem({ item }) {
           variant="ghost"
           size="sm"
           onClick={() => updateQuantity(item.product._id, item.quantity + 1)}
+          disabled={isAtMaxStock}
+          title={isAtMaxStock ? 'Maximum stock reached' : ''}
         >
           <Plus className="w-4 h-4" />
         </Button>
