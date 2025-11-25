@@ -5,6 +5,8 @@ const User = require("./../models/user");
 const { jwtAuthMiddleware } = require("../middlewares/jwt");
 const multer = require("multer");
 const path = require("path");
+const NodeCache = require("node-cache");
+const nodeCache = new NodeCache();
 
 // Set up storage engine
 const storage = multer.memoryStorage(); // store file in memory
@@ -109,8 +111,15 @@ router.delete('/:productId', jwtAuthMiddleware, async (req, res)=>{
 }); 
 
 router.get("/", async (req, res) => {
+    let result;
+
+    if(nodeCache.has("result")){
+        result = JSON.parse(nodeCache.get("result"))
+    }else{
+        result = await Product.find();
+        nodeCache.set("result", JSON.stringify(result));
+    }
     try {
-        let result = await Product.find();
         res.status(200).json(result);
     } catch (err) {
         console.log(err);
