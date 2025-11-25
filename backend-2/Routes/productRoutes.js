@@ -79,7 +79,7 @@ router.put("/:productId", jwtAuthMiddleware, upload.single("image"), async (req,
         if (!result) {
             return res.status(404).json({ error: 'product not found' });
         }
-
+        nodeCache.del("result")
         console.log('data updated');
         res.status(200).json(result);
     } catch (err) {
